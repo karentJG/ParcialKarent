@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Saber Pro</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			margin: 0;
+			font-family: 'Poppins', sans-serif;
+			background: linear-gradient(to right, #87cefa, #b0e0e6);
+		}
+
+		.container {
+			background: #ffffff;
+			border-radius: 20px;
+			box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+			padding: 40px;
+			max-width: 600px;
+			/* Ajusté el ancho máximo */
+			width: 100%;
+			text-align: center;
+			transition: transform 0.3s ease;
+		}
+
+		h2 {
+			text-align: center;
+			color: #007bb5;
+			margin-bottom: 30px;
+			font-size: 2em;
+			font-weight: 600;
+			background: linear-gradient(90deg, #007bb5, #87cefa);
+			color: transparent;
+			-webkit-background-clip: text;
+			background-clip: text;
+		}
+
+		.role-selection {
+			display: flex;
+			justify-content: space-between;
+			/* Cambié a space-between para mejor alineación */
+			margin-bottom: 20px;
+		}
+
+		.role-card {
+			background-color: #f0f8ff;
+			border-radius: 20px;
+			padding: 20px;
+			width: 45%;
+			/* Cambié a un ancho del 45% para dejar espacio entre los cuadros */
+			height: 200px;
+			/* Ajusté la altura del cuadro */
+			cursor: pointer;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 20px rgba(0, 123, 181, 0.2);
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			/* Centrar el contenido verticalmente */
+		}
+
+		.role-card i {
+			font-size: 40px;
+			color: #007bb5;
+			margin-bottom: 10px;
+			/* Espacio entre el icono y el texto */
+		}
+
+		.role-card h4 {
+			font-size: 1.6em;
+			font-weight: 700;
+			color: #007bb5;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			/* Reducido el espaciado entre letras */
+			margin: 0;
+			/* Elimina el margen para centrar mejor el título */
+		}
+
+		.form-container {
+			margin-top: 20px;
+			/* Aumenté el margen superior para una mejor separación */
+			display: none;
+			transition: all 0.5s ease;
+		}
+
+		.form-container.active {
+			display: block;
+			animation: fadeIn 0.5s ease both;
+		}
+
+		.form-group {
+			max-width: 300px;
+			margin: 0 auto;
+			/* Centrado automático */
+			text-align: left;
+			/* Alinear el texto a la izquierda para los labels */
+		}
+
+		.form-group input {
+			border-radius: 10px;
+			border: 2px solid #87cefa;
+			padding: 10px;
+			/* Aumenté el padding para mayor comodidad */
+			font-size: 14px;
+			width: 100%;
+			margin-bottom: 12px;
+			box-shadow: 0 3px 8px rgba(135, 206, 250, 0.3);
+			transition: all 0.3s ease;
+		}
+
+		.btn-submit,
+		.back-btn {
+			width: auto;
+			padding: 10px 20px;
+			/* Ajusté el padding para que sean más consistentes */
+			font-size: 14px;
+			border-radius: 10px;
+			cursor: pointer;
+			font-weight: 600;
+			transition: background-color 0.3s ease;
+			margin-top: 15px;
+			box-shadow: 0 6px 12px rgba(0, 123, 181, 0.2);
+		}
+
+		.btn-submit {
+			background-color: #007bb5;
+			border: none;
+			color: white;
+		}
+
+		.btn-submit:hover {
+			background-color: #005b87;
+		}
+
+		.back-btn {
+			background-color: #f44336;
+			color: white;
+			border: none;
+		}
+
+		.back-btn:hover {
+			background-color: #d32f2f;
+		}
+
+		@keyframes fadeIn {
+			0% {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@media (max-width: 768px) {
+			.role-selection {
+				flex-direction: column;
+				align-items: center;
+				gap: 15px;
+			}
+
+			.role-card {
+				width: 100%;
+			}
+		}
+
+		/* Enhancements for form titles */
+		h4 {
+			font-size: 2em;
+			/* Increased font size */
+			font-weight: 700;
+			color: #007bb5;
+			/* Color to match the theme */
+			text-transform: uppercase;
+			/* Keep uppercase for emphasis */
+			margin-bottom: 20px;
+			/* Increased space below the title */
+			display: flex;
+			/* Flexbox for alignment */
+			justify-content: center;
+			/* Center the icon and text */
+			align-items: center;
+			/* Center vertically */
+		}
+
+		h4 i {
+			margin-right: 10px;
+			/* Space between icon and text */
+			color: #007bb5;
+			/* Icon color */
+			font-size: 30px;
+			/* Increased icon size */
+		}
+
+		/* Styles for labels */
+		label {
+			font-weight: 600;
+			/* Bold labels */
+			margin-bottom: 5px;
+			/* Space below labels */
+			display: block;
+			/* Ensure labels are block elements */
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h2 id="main-title">Saber Pro</h2>
+
+		<!-- Menú de selección de rol -->
+		<div id="role-menu">
+			<div class="role-selection">
+				<div class="role-card" onclick="showForm('estudiante')">
+					<i class="fas fa-book"></i>
+					<h4>Estudiante</h4>
+				</div>
+				<div class="role-card" onclick="showForm('coordinador')">
+					<i class="fas fa-user-tie"></i>
+					<h4>Coordinador</h4>
+				</div>
+			</div>
+		</div>
+
+		<!-- Formularios dinámicos -->
+		<div class="form-container" id="form-estudiante">
+			<h4>Iniciar Sesión - Estudiante</h4>
+			<form action="/estudiantes/ingresar" method="post">
+				<div class="form-group">
+					<label for="numeroDocumento">Documento</label>
+					<input type="text" id="numeroDocumento" name="numeroDocumento" required>
+				</div>
+				<div class="form-group">
+					<label for="numeroRegistro">Número de Registro</label>
+					<input type="text" id="numeroRegistro" name="numeroRegistro" required>
+				</div>
+				<button type="submit" class="btn-submit">Ingresar</button>
+			</form>
+			<button class="back-btn" onclick="goBack()">Volver</button>
+		</div>
+
+		<div class="form-container" id="form-coordinador">
+			<h4>Iniciar Sesión - Coordinador</h4>
+			<form action="/coordinadores/ingresar" method="post">
+				<div class="form-group">
+					<label for="user">Correo</label>
+					<input type="text" id="user" name="user" required>
+				</div>
+				<div class="form-group">
+					<label for="password">Contraseña</label>
+					<input type="password" id="password" name="password" required>
+				</div>
+				<button type="submit" class="btn-submit">Ingresar</button>
+			</form>
+			<button class="back-btn" onclick="goBack()">Volver</button>
+		</div>
+	</div>
+
+	<script>
+		// Mostrar el formulario correspondiente y ocultar el menú
+		function showForm(role) {
+			document.getElementById('role-menu').style.display = 'none'; // Ocultar menú principal
+			document.getElementById('main-title').style.display = 'none'; // Ocultar título
+
+			if (role === 'estudiante') {
+				document.getElementById('form-estudiante').classList.add('active'); // Mostrar formulario estudiante
+			} else if (role === 'coordinador') {
+				document.getElementById('form-coordinador').classList.add('active'); // Mostrar formulario coordinador
+			}
+		}
+
+		// Función para regresar al menú principal
+		function goBack() {
+			document.getElementById('form-estudiante').classList.remove('active');
+			document.getElementById('form-coordinador').classList.remove('active');
+			document.getElementById('role-menu').style.display = 'block'; // Mostrar menú principal
+			document.getElementById('main-title').style.display = 'block'; // Mostrar título
+		}
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
