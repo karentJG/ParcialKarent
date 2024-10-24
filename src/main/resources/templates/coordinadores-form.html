@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Registro de Coordinador</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport for mobile scaling -->
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- FONT -->
+	<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+
+	<style>
+		body {
+			font-family: 'Roboto Slab', serif;
+			background-color: #e3f2fd;
+			/* Azul cielo claro */
+			margin: 0;
+			padding: 0;
+		}
+
+		h2.form-title {
+			color: #1976d2;
+			font-family: 'Dancing Script', cursive;
+			text-align: center;
+			margin-bottom: 15px;
+			/* Added margin for separation */
+		}
+
+		.form-container {
+			border: 2px solid #007bff;
+			border-radius: 10px;
+			padding: 20px;
+			/* Consistent padding */
+			background-color: white;
+			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+			margin-top: 20px;
+			margin-bottom: 30px;
+			/* Increased bottom margin for spacing */
+			max-width: 500px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		label {
+			font-weight: bold;
+			color: #343a40;
+			margin-bottom: 5px;
+		}
+
+		.button-edit {
+			background-color: #ffa726;
+			/* Naranja */
+			color: white;
+			padding: 10px 20px;
+			border-radius: 5px;
+			font-size: 16px;
+			border: none;
+			transition: background-color 0.3s ease;
+			margin: 5px;
+			/* Espaciado entre botones */
+			text-decoration: none;
+			/* Sin subrayado */
+			display: inline-block;
+			/* Para centrar en el contenedor */
+		}
+
+		.button-edit:hover {
+			background-color: #fb8c00;
+			/* Naranja más oscuro */
+		}
+
+		.button-delete {
+			background-color: #e53935;
+			/* Rojo */
+			color: white;
+			padding: 10px 20px;
+			border-radius: 5px;
+			font-size: 16px;
+			border: none;
+			transition: background-color 0.3s ease;
+			margin: 5px;
+			/* Espaciado entre botones */
+			text-decoration: none;
+			/* Sin subrayado */
+			display: inline-block;
+			/* Para centrar en el contenedor */
+		}
+
+		.button-delete:hover {
+			background-color: #c62828;
+			/* Rojo más oscuro */
+		}
+
+		@media (max-width: 768px) {
+			h2.form-title {
+				font-size: 1.5rem;
+			}
+
+			.form-group {
+				margin-bottom: 15px;
+				/* Spacing between fields */
+			}
+		}
+
+		@media (max-width: 576px) {
+			h2.form-title {
+				font-size: 1.2rem;
+			}
+
+			.btn {
+				font-size: 1rem;
+				/* Adjusted font size for buttons */
+				padding: 10px;
+				/* Consistent button padding */
+			}
+
+			.form-group {
+				margin-bottom: 10px;
+				/* Reduced bottom margin for smaller screens */
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark">
+		</nav>
+	</header>
+	<div class="container">
+		<div class="form-container">
+			<h2 class="form-title">Registro de Coordinador</h2>
+			<form th:action="@{/coordinadores/save}" th:object="${coordinador}" method="post" class="formulario">
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group mb-3">
+					<label for="nombre">Nombre:</label>
+					<input type="text" class="form-control" id="nombre" name="nombre" th:value="${coordinador.nombre}"
+						required>
+				</div>
+				<div class="form-group mb-3">
+					<label for="apellidos">Apellidos:</label>
+					<input type="text" class="form-control" id="apellidos" name="apellidos"
+						th:value="${coordinador.apellidos}" required>
+				</div>
+				<div class="form-group mb-3">
+					<label for="documento">Documento:</label>
+					<input type="text" class="form-control" id="documento" name="documento"
+						th:value="${coordinador.documento}" required>
+				</div>
+				<div class="form-group mb-3">
+					<label for="celular">Celular:</label>
+					<input type="text" class="form-control" id="celular" name="celular"
+						th:value="${coordinador.celular}" required>
+				</div>
+				<div class="form-group mb-3">
+					<label for="user">Correo:</label>
+					<input type="text" class="form-control" id="user" name="user" th:value="${coordinador.user}"
+						required>
+				</div>
+				<div class="form-group mb-3">
+					<label for="clave">Contraseña:</label>
+					<input type="password" class="form-control" id="clave" name="password" required>
+				</div>
+
+				<div class="text-center">
+					<button type="submit" class="button-edit"> <!-- Botón de guardar -->
+						Guardar
+					</button>
+					<a href="javascript:history.back()" class="button-delete"> <!-- Botón de volver -->
+						Volver
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
